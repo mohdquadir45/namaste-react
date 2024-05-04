@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { restaurantList } from "../utils/mockData";
 import { RestaurantCard } from "./RestaurantCard";
+import Shimmer from "./Shimmer";
 export const Body = () => {
   const [restList, setRestList] = useState([]);
   useEffect(() => {
@@ -18,11 +19,12 @@ export const Body = () => {
   };
 
   if (restList.length === 0) {
-    return <h1>Loading .....</h1>
+    return <Shimmer/>
   }
   return (
     <div>
       <div className="filter">
+        
         <button
           className="filter-ctn"
           onClick={() => {
