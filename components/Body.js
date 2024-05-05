@@ -14,7 +14,6 @@ export const Body = () => {
     );
 
     const json = await data.json();
-    // console.log("result",json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants )
     setRestList(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
   };
 
@@ -36,10 +35,11 @@ export const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {console.log(restList)}
+     
         {restList.map((restaurant) => (
           
-          <RestaurantCard key={restaurant.id} resData={restaurant} />
+          
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
           
         ))}
       </div>

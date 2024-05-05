@@ -4,7 +4,6 @@ import { CDN_URL } from "../utils/constants";
 export const RestaurantCard = (props) => {
   
   const { resData } = props;
-  console.log("resdata ===>", resData.info.avgRating)
     return (
       <div className="res-card">
         <img
