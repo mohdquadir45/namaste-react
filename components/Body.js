@@ -4,6 +4,8 @@ import { RestaurantCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 export const Body = () => {
   const [restList, setRestList] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredRestList, setFilteredRestList] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -14,33 +16,52 @@ export const Body = () => {
     );
 
     const json = await data.json();
-    setRestList(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    setRestList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   if (restList.length === 0) {
-    return <Shimmer/>
+    return <Shimmer />;
   }
+  const searchItem = () => {
+    console.log("first =====>", restList);
+    const filteredList = restList.filter((item) =>
+      item.info.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredRestList(filteredList);
+  };
+
   return (
     <div>
       <div className="filter">
-        
+        <div className="search">
+          <input
+            type="text"
+            className="search-input"
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+          />
+          <button onClick={searchItem}>Search</button>
+        </div>
         <button
           className="filter-ctn"
           onClick={() => {
-            const filteredList = restList.filter((res) => res.info.avgRating > 4);
-            setRestList(filteredList);
+            const filteredList = restList.filter(
+              (res) => res.info.avgRating < 4
+            );
+            setFilteredRestList(filteredList);
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
       <div className="res-container">
-     
-        {restList.map((restaurant) => (
-          
-          
+        {filteredRestList.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-          
         ))}
       </div>
     </div>

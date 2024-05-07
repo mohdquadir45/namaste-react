@@ -43,6 +43,7 @@
     color: white;
     background: black;
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 .shimmer-card {
@@ -60,4 +61,13 @@
 .login-btn {
     padding: 0px 20px;
     cursor: pointer;
+}
+
+.search{
+    display: flex;
+    margin-top: 10px;
+}
+.filter {
+    display: flex;
+    
 }
