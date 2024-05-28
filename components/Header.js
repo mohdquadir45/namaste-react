@@ -1,10 +1,11 @@
 
 import React, { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
+import { Link } from "react-router-dom";
 export const Header = () => {
   const [login, setLogin] = useState("login");
 
-  
+
   const handleClick = () => {
    return login === 'login' ? setLogin("logout") : setLogin("login")
  }
@@ -18,9 +19,9 @@ export const Header = () => {
         </div>
         <div className="nav-items">
           <ul>
-            <li>Home</li>
-            <li>Contact Us</li>
-            <li>About Us</li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/contact">Contact Us</Link></li>
+            <li><Link to="/about">About Us</Link></li>
             <li>Cart</li>
             <button className="login-btn" onClick={handleClick}>{login}</button>
           </ul>
