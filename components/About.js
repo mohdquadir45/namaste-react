@@ -6,7 +6,7 @@ const About = () => {
     return (
         <>
             <User name={" my name is Mohammed (functional component) "} />
-            <UserClass name={ " Hello I am class based component 😍"} />
+            <UserClass name={ " Hello I am class based component 😍"} location={"pune camp near azam campus"} />
         </>
     )
 }

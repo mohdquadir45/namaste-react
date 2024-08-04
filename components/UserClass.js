@@ -3,15 +3,22 @@ import React from "react";
 class UserClass extends React.Component{
     constructor(props) {
         super(props)
-        console.log("constructor ===>", props)
+        this.state = {
+            count: 0
+        }
     }
+
+    
     render() {
         
+        const { name, location } = this.props
+        const { count } = this.state
         
         return (
             <div className="">
-                <h2>Name : {this.props.name}</h2>
-                <h3>Location : @Pune Camp Pune</h3>
+                <h1>count is  : { count}</h1>
+                <h2>Name : {name}</h2>
+                <h3>Location : {location}</h3>
                 <h4>Location </h4>
             </div>
         )
