@@ -1,15 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+import { MENU_API_URL, RES_CDN_URL } from "../utils/constants";
+import { useParams } from "react-router-dom";
 const RestaurantMenu = () => {
+  const [resInfo, setResInfo] = useState(null);
+  const [isActive, setIsActive] = useState(true);
+
+  const { resId } = useParams()
+
+   
+  
+
+  useEffect(() => {
+    fetchMenu()
+  }, []);
+
+  
+  const fetchMenu = async () => {
+    const data = await fetch(MENU_API_URL + resId)
+    const json = await data.json()
+    console.log("data api ===>", json)
+    setResInfo(json.data)
+  }
+
+
+  if (resInfo === null) {
+    return <Shimmer/>
+  }
+console.log("card data ====>",  resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card?.card)
+  const { itemCards } = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card?.card
+  console.log("itemCards ===>", itemCards)
+
   return (
     <>
       <div className="menu">
-        <h1>Name of the restaurant</h1>
-        <h2>Menu</h2>
-        <ul>
-          <li>Biryani</li>
-          <li>Burgers</li>
-          <li>Diet Coke</li>
-        </ul>
+      <button className="accordian" onClick={() => setIsActive(!isActive)}>{ isActive ? '+':'-'}</button>
+
+        {isActive && (
+        <>
+          {itemCards.map((item) => {
+          return (
+            <div className="main-cont">
+            <div key={`resId${item.card.info.id}`} className="card-container">
+              <div>
+                <h4>{item.card.info.name}</h4>
+                <p> {item.card.info.price}</p>
+                <p>{ item.card.info.description}</p>
+              </div>
+              <div className="resImg-container">
+                <img className="res-image" src={RES_CDN_URL + item?.card?.info?.imageId}
+                  alt="restaurant images" />
+              </div>
+              
+            </div>
+            </div>
+            
+          
+          )
+          })}
+          </>
+        )}
+        
       </div>
     </>
   );

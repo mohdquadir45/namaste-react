@@ -71,3 +71,37 @@
     display: flex;
     
 }
+/* .menu{
+    width: 250px;
+    border: 1px solid black;
+
+} */
+
+.card-container{
+    display: flex;
+    width: 800px;
+    /* height: 200px; */
+    /* border: 1px solid black; */
+    align-items: center;
+    margin-left:400px;
+    border-bottom: 2px solid gray;
+    
+}
+.res-image{
+    /* width: 200px;
+    height: 200px; */
+
+    width: 150px; /* Set the width of the image */
+    height: auto; /* Maintain the aspect ratio */
+    border: 2px solid #000; /* Add a solid border around the image */
+    border-radius: 10px; /* Round the corners */
+    filter: grayscale(50%); /* Apply a grayscale filter */
+    transition: transform 0.3s ease; /* Smooth transition for transformations */
+}
+.accordian{
+    font-size: 20px;
+    cursor: pointer;
+    background-color: lightgray;
+    border-color: lightgray;
+    margin-left: 400px;
+}

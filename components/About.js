@@ -1,9 +1,10 @@
 
 import React from "react";
+import User from "./User";
 const About = () => {
     return (
         <>
-            Hello I am About Us Page
+            <User/>
         </>
     )
 }
