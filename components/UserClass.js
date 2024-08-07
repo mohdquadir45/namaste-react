@@ -4,14 +4,37 @@ class UserClass extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            count: 0
+            userInfo: {
+                name: "Dummy name",
+                address: {
+                    city : "default"
+                }
+            }
         }
         console.log(" child userClass Constructor called ")
     }
     
-    componentDidMount() {
-    console.log("Child userClass ComponentDidMount")
-}
+    async componentDidMount() {
+        const data = await fetch("https://jsonplaceholder.typicode.com/users")
+        const json = await data.json();
+        const firstObject = json[0]
+        console.log("firstName ===>", firstObject)
+        this.setState({
+            userInfo : firstObject
+        })
+
+        //make an api call here okay
+
+        
+    }
+    componentDidUpdate(){
+        this.timer = setInterval(() => {
+           console.log("first")
+       }, 1000)
+    }
+    componentWillUnmount() {
+        clearInterval(this.timer)
+    }
     
     render() {
         
@@ -28,8 +51,8 @@ class UserClass extends React.Component{
                         })
                     }}
                     >Increment count</button>
-                <h2>Name : {name}</h2>
-                <h3>Location : {location}</h3>
+                <h2>Name : {this.state.userInfo.name}</h2>
+                <h3>Location : {this.state.userInfo.address.city}</h3>
                 <h4>Location </h4>
             </div>
         )
